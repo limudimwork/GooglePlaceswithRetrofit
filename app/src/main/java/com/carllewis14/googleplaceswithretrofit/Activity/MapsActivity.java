@@ -46,6 +46,9 @@ GoogleApiClient.OnConnectionFailedListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            checkLocationPermission();
+        }
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -77,10 +80,7 @@ GoogleApiClient.OnConnectionFailedListener{
             buildGoogleApiClient();
             mMap.setMyLocationEnabled(true);
         }
-
-        // Add a marker in Sydney and move the camera
-        mMap.addMarker(new MarkerOptions().position(mLondon).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(mLondon));
+        
     }
 
     /**
