@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.widget.Toast;
 
 import com.carllewis14.googleplaceswithretrofit.R;
 import com.google.android.gms.common.ConnectionResult;
@@ -171,6 +172,29 @@ GoogleApiClient.OnConnectionFailedListener{
     }
 
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_LOCATION: {
+                //if request is cancelled, the result arrays are empty
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    //Permission was granted
+                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                            == PackageManager.PERMISSION_GRANTED) {
+                        if (mGoogleApiClient == null) {
+                            buildGoogleApiClient();
+                        }
+                        mMap.setMyLocationEnabled(true);
+                    }
+                } else {
+                    //Permission denied, disable the functionality that depends on this permission
+                    Toast.makeText(this, "permission denied", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+        }
+    }
 
     @Override
     public void onConnectionSuspended(int i) {
