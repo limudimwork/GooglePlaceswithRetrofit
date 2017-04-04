@@ -80,7 +80,7 @@ GoogleApiClient.OnConnectionFailedListener{
             buildGoogleApiClient();
             mMap.setMyLocationEnabled(true);
         }
-        
+
     }
 
     /**
@@ -191,7 +191,6 @@ GoogleApiClient.OnConnectionFailedListener{
                     //Permission denied, disable the functionality that depends on this permission
                     Toast.makeText(this, "permission denied", Toast.LENGTH_SHORT).show();
                 }
-                return;
             }
         }
     }

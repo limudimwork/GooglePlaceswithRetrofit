@@ -2,4 +2,5 @@
     <string name="app_name">Google Places with Retrofit</string>
     <string name="title_activity_maps">Map</string>
     <string name="actionbarMap">Map</string>
+    <string name="title_activity_places_maps">Map</string>
 </resources>
